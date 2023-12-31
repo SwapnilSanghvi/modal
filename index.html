@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Image Display</title>
+    <style>
+      #overlay {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease;
+      }
+
+      #modal {
+        background-color: white;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        transition: transform 0.3s ease;
+        transform: scale(1);
+      }
+
+      img {
+        width: 100%;
+        max-width: 700px;
+        height: auto;
+      }
+
+      #closeBtn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        border-radius: 22px;
+        font-family: Arial;
+        color: #fff;
+        font-size: 20px;
+        background: #0063c6;
+        padding: 10px 20px 10px 20px;
+        text-decoration: none;
+      }
+      #closeBtn:hover {
+        opacity: 0.7;
+      }
+
+      /* Fade in and scale up animation */
+      #overlay.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #modal.hidden {
+        transform: scale(0.8);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="overlay">
+      <div id="modal">
+        <img src="./new-year.jpg" alt="Image" />
+        <button id="closeBtn">Close</button>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const overlay = document.getElementById("overlay");
+        const closeBtn = document.getElementById("closeBtn");
+        const modal = document.getElementById("modal");
+
+        // Delay the display of the modal by 3 seconds
+        setTimeout(() => {
+          // Show the overlay with animation
+          overlay.classList.add("visible");
+        }, 3000);
+
+        // Close the overlay with animation when the close button is clicked
+        closeBtn.addEventListener("click", function () {
+          modal.classList.add("hidden");
+          overlay.classList.remove("visible");
+
+          // Optionally, you can hide the overlay after the animation is complete
+          setTimeout(() => {
+            overlay.style.visibility = "hidden";
+          }, 300);
+        });
+      });
+    </script>
+  </body>
+</html>
